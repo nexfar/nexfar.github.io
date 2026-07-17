@@ -108,6 +108,16 @@ footer{text-align:center;color:#9ca3af;font-size:12px;padding:24px 16px;border-t
   .step{padding:12px 0}
   .section-card{margin-bottom:16px}
 }
+
+/* MOBILEFIX3 */
+@media(max-width:680px){
+  /* padding lateral inline exagerado -> 16px (grade 8) */
+  .section-card [style*="padding:0 28px"]{padding-left:16px!important;padding-right:16px!important}
+  /* mockup do PDF: paginas encolhem pra caber (antes 150px fixo cortava a viewport) */
+  .section-card [style*="background:#525659"]{padding:12px 8px}
+  .section-card [style*="background:#525659"]>div{flex:1 1 0;min-width:0}
+  .section-card [style*="background:#525659"] img{width:100%!important;height:auto!important;aspect-ratio:150/200}
+}
 /* NAVEXPORT */
 html{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
