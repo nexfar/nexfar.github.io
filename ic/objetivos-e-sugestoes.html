@@ -192,6 +192,8 @@ footer{margin-top:0}
 .flow-steps::-webkit-scrollbar{display:none}
 .flow-steps.scrollable{cursor:grab}
 .flow-steps.dragging{cursor:grabbing;scroll-behavior:auto;user-select:none}
+.flow-steps a{-webkit-user-drag:none}
+.flow-steps.dragging a{pointer-events:none}
 .flow-steps[data-edge="right"]{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent)}
 .flow-steps[data-edge="left"]{-webkit-mask-image:linear-gradient(90deg,transparent,#000 26px);mask-image:linear-gradient(90deg,transparent,#000 26px)}
 .flow-steps[data-edge="both"]{-webkit-mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent);mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent)}
@@ -828,16 +830,17 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
     var down=false,sx=0,sl=0,moved=false;
     fs.addEventListener('pointerdown',function(e){
       if(e.pointerType==='touch'||!fs.classList.contains('scrollable'))return;
-      down=true;moved=false;sx=e.clientX;sl=fs.scrollLeft;
+      down=true;moved=false;sx=e.clientX;sl=fs.scrollLeft;e.preventDefault();
       try{fs.setPointerCapture(e.pointerId);}catch(_){}
     });
     fs.addEventListener('pointermove',function(e){
       if(!down)return;
       var dx=e.clientX-sx;
-      if(Math.abs(dx)>3){moved=true;fs.classList.add('dragging');}
+      if(Math.abs(dx)>5){moved=true;fs.classList.add('dragging');}
       fs.scrollLeft=sl-dx;
     });
     function endDrag(){if(down){down=false;fs.classList.remove('dragging');}}
+    fs.addEventListener('dragstart',function(e){e.preventDefault();});
     fs.addEventListener('pointerup',endDrag);
     fs.addEventListener('pointercancel',endDrag);
     fs.addEventListener('click',function(e){if(moved){e.preventDefault();e.stopPropagation();moved=false;}},true);
