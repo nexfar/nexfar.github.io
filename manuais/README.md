@@ -11,26 +11,26 @@ Todos os `.html` de manual são **auto-contidos** (imagens em `base64`, sem asse
 /manuais/assets/      -> logo Nexfar (usado na home)
 /manuais/README.md    -> este arquivo
 /manuais/build-nav-export.py
-/<slug>               -> manual (o GitHub Pages serve o .html)
-/ic/, /ic/<slug>      -> redirects legados para /manuais/ e /<slug>
+/ic/                  -> redireciona para /manuais/  (organizador, sem página própria)
+/ic/<slug>            -> manual (o GitHub Pages serve o .html)
 ```
 
 | URL de produção | Página |
 |---|---|
 | `/manuais` | Home (produtos) |
-| `/objetivos-e-sugestoes` | Objetivos e Sugestões — Com meta |
-| `/objetivos-e-sugestoes-sem-meta` | Objetivos e Sugestões — Sem meta |
-| `/cotacao-agil` | Cotação Ágil |
-| `/catalogo-digital` | Catálogo Digital — Com preço |
-| `/catalogo-digital-sem-preco` | Catálogo Digital — Sem preço |
+| `/ic/objetivos-e-sugestoes` | Objetivos e Sugestões — Com meta |
+| `/ic/objetivos-e-sugestoes-sem-meta` | Objetivos e Sugestões — Sem meta |
+| `/ic/cotacao-agil` | Cotação Ágil |
+| `/ic/catalogo-digital` | Catálogo Digital — Com preço |
+| `/ic/catalogo-digital-sem-preco` | Catálogo Digital — Sem preço |
 
-`/` e `/ic/` redirecionam para `/manuais/`; `/ic/<slug>` redireciona para `/<slug>` (via `<meta refresh>` + JS). Os stubs em `/ic/` existem só para não quebrar links já divulgados.
-Novo manual = novo `.html` na raiz + nova entrada na seção do produto na home.
+`/` e `/ic/` redirecionam para `/manuais/` (redirect via `<meta refresh>` + JS).
+Novo produto = nova pasta `/<produto>/` na raiz + nova seção `.product-block` na home.
 
 ## Nav / export / build
 
 `manuais/build-nav-export.py` é idempotente (marcadores `<!--NAVEXPORT-->` / `/* NAVEXPORT */`).
-Injeta nos manuais (`/<slug>.html` na raiz): breadcrumb sticky (home `/manuais/` + dropdown de manuais) + índice
+Injeta nos manuais (`/ic/*.html`): breadcrumb sticky (home `/manuais/` + dropdown de manuais) + índice
 de seções, índice sticky com scroll suave, back-to-top, export PDF (`window.print()` página-única),
 `@media print`. Na home injeta a seção de produto, o logo Nexfar, o botão + modal de export combinado
 e os links de produção. Rodar sempre de dentro de `manuais/`:
