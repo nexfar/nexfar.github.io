@@ -13,7 +13,7 @@ import os, re, base64
 
 HERE = os.path.dirname(os.path.abspath(__file__))       # .../manuais
 ROOT = os.path.dirname(HERE)                            # raiz do repo (nexfar.github.io)
-IC_DIR = os.path.join(ROOT, "ic")                       # /ic (manuais IC, slugs limpos)
+IC_DIR = ROOT                                           # manuais na raiz (/<slug>)
 ASSETS = os.path.join(HERE, "assets")
 
 def nexfar_logo_img():
@@ -23,7 +23,7 @@ def nexfar_logo_img():
             '" alt="Nexfar" style="height:30px;width:auto;display:block;margin-bottom:18px">')
 
 # slug -> (label curto p/ dropdown, old_maxwidth, new_maxwidth, onepage_print_width)
-# arquivo = /ic/<slug>.html ; URL de producao = /ic/<slug> (GitHub Pages serve .html)
+# arquivo = /<slug>.html ; URL de producao = /<slug> (GitHub Pages serve .html)
 MANUALS = [
     ("objetivos-e-sugestoes",          "Objetivos · Com meta",  900, 1125, 1157),
     ("objetivos-e-sugestoes-sem-meta",  "Objetivos · Sem meta",  900, 1125, 1157),
@@ -214,7 +214,7 @@ def breadcrumb(current):
         if slug == current:
             cur_label = label
         cls = ' class="current"' if slug == current else ""
-        menu += '          <a href="/ic/%s"%s>%s</a>\n' % (slug, cls, label)
+        menu += '          <a href="/%s"%s>%s</a>\n' % (slug, cls, label)
     return (MARK + '''    <div class="crumb">
       <a class="crumb-home" href="/manuais/">''' + SVG_BACK + ''' Manuais</a>
       <span class="crumb-sep">/</span>
@@ -318,7 +318,7 @@ INDEX_CSS = CSS_MARK + """
 def index_modal_html():
     items = ""
     for slug, label, _o, _n, _w in MANUALS:
-        items += '      <label><input type="checkbox" value="/ic/%s.html" checked> %s</label>\n' % (slug, label)
+        items += '      <label><input type="checkbox" value="/%s.html" checked> %s</label>\n' % (slug, label)
     return (MARK + """
 <div class="modal-ov" id="pdfModal">
   <div class="modal">
@@ -437,7 +437,7 @@ def patch_index(path):
     assert html.count("</body>") == 1
     html = html.replace("</body>", index_modal_html() + "</body>", 1)
 
-    # links da home -> URLs de producao /ic/<slug> (nav) ; fetch do export usa .html
+    # links da home -> URLs de producao /<slug> (nav) ; fetch do export usa .html
     slugmap = {
         'manual-objetivos-sugestoes.html':          'objetivos-e-sugestoes',
         'manual-objetivos-sugestoes-sem-meta.html':  'objetivos-e-sugestoes-sem-meta',
@@ -446,8 +446,8 @@ def patch_index(path):
         'manual-catalogo-digital-sem-preco.html':    'catalogo-digital-sem-preco',
     }
     for old, slug in slugmap.items():
-        html = html.replace('href="' + old + '"',  'href="/ic/' + slug + '"')
-        html = html.replace('value="' + old + '"', 'value="/ic/' + slug + '.html"')
+        html = html.replace('href="' + old + '"',  'href="/' + slug + '"')
+        html = html.replace('value="' + old + '"', 'value="/' + slug + '.html"')
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(html)
