@@ -137,7 +137,8 @@ footer{margin-top:0}
 .hero-export:hover{background:rgba(255,255,255,.26);border-color:rgba(255,255,255,.65)}
 .hero-export:active{transform:translateY(1px)}
 .flow-bar-inner{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:20px}
-.flow-steps{display:flex;align-items:center;justify-content:flex-end;overflow-x:auto;min-width:0}
+.flow-steps{display:flex;align-items:center;justify-content:flex-start;overflow-x:auto;min-width:0;padding-bottom:2px}
+.flow-steps>:first-child{margin-left:auto}
 .crumb{display:flex;align-items:center;gap:9px;flex-shrink:0}
 .crumb-home{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#6b7280;padding:6px 8px;border-radius:7px}
 .crumb-home:hover{background:#f3eefb;color:#753bbd}
@@ -154,8 +155,11 @@ footer{margin-top:0}
 .crumb-menu a.current{background:#ede9f8;color:#5b2da0;font-weight:700}
 @media(max-width:720px){.flow-bar-inner{grid-template-columns:1fr;gap:10px;padding:8px 0}.flow-steps{justify-content:flex-start}.crumb{flex-wrap:wrap}}
 /* MOBILEFIX: barra de tabs sem scrollbar, com fade de borda (sinaliza scroll) e drag */
-.flow-steps{scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
-.flow-steps::-webkit-scrollbar{display:none}
+.flow-steps{scrollbar-width:thin;scrollbar-color:#d1d5db transparent;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.flow-steps::-webkit-scrollbar{height:6px}
+.flow-steps::-webkit-scrollbar-track{background:transparent}
+.flow-steps::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
+.flow-steps::-webkit-scrollbar-thumb:hover{background:#b9bec7}
 .flow-steps.scrollable{cursor:grab}
 .flow-steps.dragging{cursor:grabbing;scroll-behavior:auto;user-select:none}
 .flow-steps[data-edge="right"]{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent)}
