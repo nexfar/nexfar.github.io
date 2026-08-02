@@ -335,7 +335,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <tr><td><span class="badge badge-purple">🗂 Aberta</span></td><td>Cotação pronta, com os preços disponíveis para revisão. Pode virar pedido a qualquer momento.</td></tr>
           <tr><td><span class="badge badge-blue">🕐 Rascunho</span></td><td>Cotação ainda em processamento <em>ou</em> parada esperando uma ação sua. Ver <a href="#s5">etapa 5</a>.</td></tr>
           <tr><td><span class="badge badge-green">🛍 Convertida</span></td><td>A cotação já virou pedido na Plataforma de Vendas.</td></tr>
-          <tr><td><span class="badge badge-gray">📁 Arquivada</span></td><td>Cotação encerrada por tempo ou pelo distribuidor; fica só como histórico.</td></tr>
+          <tr><td><span class="badge badge-gray">🗑 Removida</span></td><td>Cotação retirada da listagem padrão por você. Ela não é apagada: volta pelo <code>Filtro</code>, em "Cotações removidas". Ver <a href="#s8">etapa 8</a>.</td></tr>
         </table>
 
         <div class="callout callout-info" style="margin-top:12px">
@@ -1161,7 +1161,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
         </div>
         <div class="callout callout-warn" style="margin-top:8px">
           <span class="callout-icon">⚠️</span>
-          <div class="callout-body"><strong>Rascunho é a exceção.</strong> Remover uma cotação em <span class="badge badge-blue">🕐 Rascunho</span> apaga a cotação por completo — ela não volta pelo filtro. As demais (Aberta, Convertida, Arquivada) apenas saem da lista padrão.</div>
+          <div class="callout-body"><strong>Rascunho é a exceção.</strong> Remover uma cotação em <span class="badge badge-blue">🕐 Rascunho</span> apaga a cotação por completo — ela não volta pelo filtro. As demais (Aberta e Convertida) apenas saem da lista padrão e voltam pelo filtro.</div>
         </div>
         <div class="callout callout-info" style="margin-top:8px">
           <span class="callout-icon">🗑️</span>
@@ -1246,7 +1246,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
       </div>
       <div class="faq-item">
         <div class="faq-q">Removi uma cotação por engano — ela foi apagada?</div>
-        <div class="faq-a">Depende do status. Cotações <strong>Aberta</strong>, <strong>Convertida</strong> ou <strong>Arquivada</strong> apenas saem da listagem: abra o <strong>Filtro</strong> e, em "Cotações removidas", selecione <strong>Exibir</strong> para consultá-las. Já uma cotação em <strong>Rascunho</strong> é apagada por completo e não pode ser recuperada.</div>
+        <div class="faq-a">Depende do status. Cotações <strong>Aberta</strong> ou <strong>Convertida</strong> apenas saem da listagem: abra o <strong>Filtro</strong> e, em "Cotações removidas", selecione <strong>Exibir</strong> para consultá-las. Já uma cotação em <strong>Rascunho</strong> é apagada por completo e não pode ser recuperada.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">A cotação inclui preços com ST?</div>
@@ -1346,19 +1346,22 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
     fs.setAttribute('data-edge', l<=1?'right':(l>=max-1?'left':'both'));
   }
   if(fs){
-    var down=false,sx=0,sl=0,moved=false;
+    var down=false,sx=0,sl=0,moved=false,pid=null;
     fs.addEventListener('pointerdown',function(e){
       if(e.pointerType==='touch'||!fs.classList.contains('scrollable'))return;
-      down=true;moved=false;sx=e.clientX;sl=fs.scrollLeft;e.preventDefault();
-      try{fs.setPointerCapture(e.pointerId);}catch(_){}
+      down=true;moved=false;sx=e.clientX;sl=fs.scrollLeft;pid=e.pointerId;
     });
     fs.addEventListener('pointermove',function(e){
       if(!down)return;
       var dx=e.clientX-sx;
-      if(Math.abs(dx)>5){moved=true;fs.classList.add('dragging');}
+      /* captura o ponteiro so depois do limiar de arrasto: capturar ja no
+         pointerdown redireciona o click para a barra e mata a ancora */
+      if(!moved&&Math.abs(dx)>5){moved=true;fs.classList.add('dragging');try{fs.setPointerCapture(pid);}catch(_){}}
+      if(!moved)return;
+      e.preventDefault();
       fs.scrollLeft=sl-dx;
     });
-    function endDrag(){if(down){down=false;fs.classList.remove('dragging');}}
+    function endDrag(){if(down){down=false;fs.classList.remove('dragging');try{fs.releasePointerCapture(pid);}catch(_){}pid=null;}}
     fs.addEventListener('dragstart',function(e){e.preventDefault();});
     fs.addEventListener('pointerup',endDrag);
     fs.addEventListener('pointercancel',endDrag);

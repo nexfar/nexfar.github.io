@@ -912,19 +912,22 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
     fs.setAttribute('data-edge', l<=1?'right':(l>=max-1?'left':'both'));
   }
   if(fs){
-    var down=false,sx=0,sl=0,moved=false;
+    var down=false,sx=0,sl=0,moved=false,pid=null;
     fs.addEventListener('pointerdown',function(e){
       if(e.pointerType==='touch'||!fs.classList.contains('scrollable'))return;
-      down=true;moved=false;sx=e.clientX;sl=fs.scrollLeft;e.preventDefault();
-      try{fs.setPointerCapture(e.pointerId);}catch(_){}
+      down=true;moved=false;sx=e.clientX;sl=fs.scrollLeft;pid=e.pointerId;
     });
     fs.addEventListener('pointermove',function(e){
       if(!down)return;
       var dx=e.clientX-sx;
-      if(Math.abs(dx)>5){moved=true;fs.classList.add('dragging');}
+      /* captura o ponteiro so depois do limiar de arrasto: capturar ja no
+         pointerdown redireciona o click para a barra e mata a ancora */
+      if(!moved&&Math.abs(dx)>5){moved=true;fs.classList.add('dragging');try{fs.setPointerCapture(pid);}catch(_){}}
+      if(!moved)return;
+      e.preventDefault();
       fs.scrollLeft=sl-dx;
     });
-    function endDrag(){if(down){down=false;fs.classList.remove('dragging');}}
+    function endDrag(){if(down){down=false;fs.classList.remove('dragging');try{fs.releasePointerCapture(pid);}catch(_){}pid=null;}}
     fs.addEventListener('dragstart',function(e){e.preventDefault();});
     fs.addEventListener('pointerup',endDrag);
     fs.addEventListener('pointercancel',endDrag);
