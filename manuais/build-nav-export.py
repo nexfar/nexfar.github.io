@@ -238,7 +238,7 @@ def patch_manual(path, fn, label, old_mw, new_mw, onepage_w):
     # 1b) barra de versao: tira do topo, joga pro footer (border-bottom -> border-top)
     banner = ('<div style="background:#ede9f8;border-bottom:1px solid #c4aeef;color:#5b2da0;'
               'padding:9px 24px;font-size:13px;text-align:center;font-weight:600">'
-              '✓ Este manual está atualizado de acordo com a versão 0.5.2</div>')
+              '✓ Este manual está atualizado de acordo com a versão 0.6.0</div>')
     assert banner in html, "banner de versao nao encontrado em " + fn
     html = html.replace(banner, "", 1)
     assert "<footer>" in html
@@ -412,7 +412,7 @@ def patch_index(path):
     # IC vira uma SECAO de produto (pronto p/ outros produtos como secoes irmas)
     product_open = ('  <div class="product-block">\n'
         '    <div class="product-head">\n'
-        '      <div class="product-name">Inteligência Comercial <span class="product-badge">v0.5.2</span></div>\n'
+        '      <div class="product-name">Inteligência Comercial <span class="product-badge">v0.6.0</span></div>\n'
         '      <div class="product-desc">Ferramentas de apoio à venda no PDV — objetivos, cotação e catálogo.</div>\n'
         '    </div>\n')
     assert '  <div class="cat-block">' in html
@@ -427,12 +427,12 @@ def patch_index(path):
     assert anchor in html, "anchor do header nao encontrado"
     html = html.replace(anchor, btn + anchor, 1)
     # home nao tem indicador de versao (a versao vira badge ao lado do titulo do produto)
-    vbanner = '<div class="vbanner">✓ Documentação atualizada de acordo com a versão 0.5.2</div>'
+    vbanner = '<div class="vbanner">✓ Documentação atualizada de acordo com a versão 0.6.0</div>'
     html = html.replace(vbanner + "\n", "", 1)
     html = html.replace(vbanner, "", 1)
     # footer generico (multi-produto, sem versao IC-especifica)
     html = html.replace(
-        '<div class="foot">Nexfar Inteligência Comercial · versão 0.5.2</div>',
+        '<div class="foot">Nexfar Inteligência Comercial · versão 0.6.0</div>',
         '<div class="foot">Nexfar · Central de Manuais</div>')
     assert html.count("</body>") == 1
     html = html.replace("</body>", index_modal_html() + "</body>", 1)
