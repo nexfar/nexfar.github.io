@@ -115,6 +115,10 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
 .header-title{font-size:32px}
 .header-desc{font-size:15px}
 .section-title{font-size:24px}
+/* .section-title nao declarava line-height e herdava o 1.65 do body: leading de
+   texto corrido num titulo. Em 320px, 36 dos 38 titulos dos manuais quebram em
+   2-3 linhas, e o vao entre elas ficava enorme. */
+.section-title{line-height:1.25}
 @media(max-width:900px){
   .header-title{font-size:27px}
   .header-desc{font-size:14px}
@@ -124,11 +128,18 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
   .header-title{font-size:24px}
   .header-desc{font-size:13.5px}
   .section-title{font-size:20px}
+  /* numero e gap menores devolvem largura ao titulo; o titulo fica centrado
+     no eixo vertical do numero (align-items:center, o padrao de .section-meta) */
+  .section-meta{gap:10px;align-items:center}
+  .section-num{width:28px;height:28px;border-radius:9px;font-size:13px}
 }
 /* Alvos de toque: crumb-btn/crumb-home/hero-export mediam 30-35px de altura.
    Cobre toque de verdade (pointer:coarse) e tela estreita (esta da para medir). */
 @media(max-width:680px),(pointer:coarse){
-  .crumb-btn,.crumb-home,.hero-export,.hbtn{min-height:44px}
+  /* 36px em vez de 44: o minimo AA (WCAG 2.5.8) e 24px, e a barra de
+     breadcrumb fica mais baixa, sobrando tela para o conteudo */
+  .crumb-btn,.crumb-home{min-height:36px;padding-top:0;padding-bottom:0}
+  .hero-export,.hbtn{min-height:44px}
   .crumb-btn,.crumb-home{display:inline-flex;align-items:center}
 }
 /* Breadcrumb sempre em uma linha nas telas estreitas: so o rotulo do dropdown
