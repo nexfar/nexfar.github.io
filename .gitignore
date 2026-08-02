@@ -1,0 +1,4 @@
+# Config local do Claude Code — nao versionar num repo publico de Pages,
+# onde tudo que e commitado passa a ser servido no site.
+.claude/
+.impeccable/
