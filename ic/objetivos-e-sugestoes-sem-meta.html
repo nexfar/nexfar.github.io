@@ -166,6 +166,26 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
   .screen-layout{grid-template-columns:1fr!important}
   .section-card>.screen-layout>.screen-col{order:-1;margin-top:0}
   .screen-col{margin-top:0}
+  /* o cabecalho reserva 316px a direita para o mockup que o -92px puxa para
+     cima; com o mockup embaixo essa reserva so espremia o inicio da secao */
+  .section-card>.section-header{padding-right:28px}
+}
+/* Tipografia por breakpoint. O NAVEXPORT redefine .header-title em 24px sem
+   media query, o que achatava o passo 32/24 que os manuais tinham: o titulo
+   ficava do mesmo tamanho em 320px e em 1280px. Escala fixa por faixa (o
+   register e product; tipografia fluida com clamp nao serve aqui). */
+.header-title{font-size:32px}
+.header-desc{font-size:15px}
+.section-title{font-size:24px}
+@media(max-width:900px){
+  .header-title{font-size:27px}
+  .header-desc{font-size:14px}
+  .section-title{font-size:22px}
+}
+@media(max-width:680px){
+  .header-title{font-size:24px}
+  .header-desc{font-size:13.5px}
+  .section-title{font-size:20px}
 }
 /* Alvos de toque: crumb-btn/crumb-home/hero-export mediam 30-35px de altura.
    Cobre toque de verdade (pointer:coarse) e tela estreita (esta da para medir). */
