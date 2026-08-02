@@ -2,3 +2,7 @@
 # onde tudo que e commitado passa a ser servido no site.
 .claude/
 .impeccable/
+
+# Contexto de produto do impeccable: fica local, nao vai ao ar.
+PRODUCT.md
+DESIGN.md
