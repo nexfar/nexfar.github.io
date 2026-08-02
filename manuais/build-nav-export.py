@@ -97,6 +97,30 @@ footer{margin-top:0}
 }
 body.printing{width:__OPWpx;margin:0 auto;overflow:visible}
 body.printing .hero-top,body.printing .flow-bar{display:none!important}
+/* ADAPT */
+/* Tablet: o grid de 2 colunas so cabe a partir de ~900px. Abaixo disso a coluna
+   de texto caia para 235-351px, estreita demais para os passos. */
+@media(max-width:900px){
+  .screen-layout{grid-template-columns:1fr!important}
+  .section-card>.screen-layout>.screen-col{order:-1;margin-top:0}
+  .screen-col{margin-top:0}
+}
+/* Alvos de toque: crumb-btn/crumb-home/hero-export mediam 30-35px de altura.
+   Cobre toque de verdade (pointer:coarse) e tela estreita (esta da para medir). */
+@media(max-width:680px),(pointer:coarse){
+  .crumb-btn,.crumb-home,.hero-export,.hbtn{min-height:44px}
+  .crumb-btn,.crumb-home{display:inline-flex;align-items:center}
+}
+/* Breadcrumb sempre em uma linha nas telas estreitas: so o rotulo do dropdown
+   encolhe, com reticencias. Home, separador e chevron nunca encolhem. */
+@media(max-width:480px){
+  .crumb{flex-wrap:nowrap;min-width:0}
+  .crumb-home,.crumb-sep{flex:0 0 auto}
+  .crumb-current{min-width:0;flex:1 1 auto}
+  .crumb-btn{min-width:0;max-width:100%}
+  .crumb-btn>svg{flex:0 0 auto}
+  .crumb-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;display:block}
+}
 """.replace("__OPW", str(onepage_w)))
 
 def manual_js(onepage_w):
@@ -219,7 +243,7 @@ def breadcrumb(current):
       <a class="crumb-home" href="/manuais/">''' + SVG_BACK + ''' Manuais</a>
       <span class="crumb-sep">/</span>
       <div class="crumb-current" id="crumbCurrent">
-        <button class="crumb-btn" type="button" onclick="crumbToggle(event)">''' + cur_label + ' ' + SVG_CHEVRON + '''</button>
+        <button class="crumb-btn" type="button" onclick="crumbToggle(event)"><span class="crumb-label">''' + cur_label + '</span> ' + SVG_CHEVRON + '''</button>
         <div class="crumb-menu">
 ''' + menu + '''        </div>
       </div>
