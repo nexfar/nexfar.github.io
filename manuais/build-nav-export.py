@@ -50,6 +50,11 @@ PRODUCTS = {
     # },
 }
 
+# Manuais que entregam PDF pronto em vez da impressao do navegador. A chave e
+# "<produto>/<slug>" e o valor, uma lista de (rotulo, descricao, href). Sem entrada aqui,
+# o botao Exportar PDF continua chamando window.print(), como nos manuais da IC.
+DOWNLOADS = {}
+
 # Manual em validacao entra por aqui, sem passar pelo versionamento: um
 # `produtos-locais.json` ao lado deste script, no mesmo formato de PRODUCTS, e mesclado
 # quando existe. E o que permite servir e conferir a pagina antes de ela ir ao ar.
@@ -59,6 +64,8 @@ if os.path.exists(_LOCAIS):
     with open(_LOCAIS, encoding="utf-8") as _f:
         for _prod, _cfg in json.load(_f).items():
             _cfg["manuais"] = [tuple(m) for m in _cfg["manuais"]]
+            for _slug, _vs in _cfg.pop("downloads", {}).items():
+                DOWNLOADS[_prod + "/" + _slug] = [tuple(v) for v in _vs]
             PRODUCTS[_prod] = _cfg
 
 def product_dir(prod):
@@ -87,7 +94,9 @@ html{scroll-behavior:smooth}
 .header-title{font-size:24px;margin:8px 0 8px}
 .header-desc{margin-bottom:0;font-size:13.5px;line-height:1.5;max-width:760px}
 footer{margin-top:0}
-.hero-top{position:absolute;top:0;right:0;display:flex;align-items:center;gap:10px;z-index:2}
+/* z-index acima da flow-bar (50): .hero-top e um contexto de empilhamento, entao o
+   menu de versoes do PDF herda o valor daqui, nao o proprio. */
+.hero-top{position:absolute;top:0;right:0;display:flex;align-items:center;gap:10px;z-index:60}
 @media(max-width:560px){.hero-top{position:static;margin-top:12px}.header-title{margin-top:14px}}
 .to-top{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;background:#753bbd;color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 24px rgba(76,29,143,.34);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .28s cubic-bezier(.16,1,.3,1),transform .28s cubic-bezier(.16,1,.3,1),visibility .28s,background .2s;z-index:70}
 .to-top.show{opacity:1;visibility:visible;transform:translateY(0)}
@@ -96,6 +105,16 @@ footer{margin-top:0}
 .hero-export{font-family:inherit;font-size:13px;font-weight:600;color:#fff;display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border-radius:9px;border:1px solid rgba(255,255,255,.38);background:rgba(255,255,255,.15);cursor:pointer;transition:background .25s ease,border-color .25s ease}
 .hero-export:hover{background:rgba(255,255,255,.26);border-color:rgba(255,255,255,.65)}
 .hero-export:active{transform:translateY(1px)}
+.hero-pdf{position:relative}
+.hero-pdf .hero-export svg:last-child{transition:transform .2s ease}
+.hero-pdf.open .hero-export svg:last-child{transform:rotate(180deg)}
+.hero-pdf-menu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 14px 34px rgba(17,24,39,.18);padding:6px;min-width:270px;display:none;z-index:60;text-align:left}
+.hero-pdf.open .hero-pdf-menu{display:block}
+.hero-pdf-menu a{display:block;padding:10px 12px;border-radius:8px;color:#374151}
+.hero-pdf-menu a:hover{background:#f3eefb}
+.hero-pdf-menu strong{display:block;font-size:13.5px;font-weight:700;color:#111827}
+.hero-pdf-menu a:hover strong{color:#753bbd}
+.hero-pdf-menu span{display:block;font-size:12px;color:#4b5563;margin-top:2px;line-height:1.45}
 .flow-bar-inner{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:20px}
 .flow-steps{display:flex;align-items:center;justify-content:flex-start;overflow-x:auto;min-width:0}
 .flow-steps>:first-child{margin-left:auto}
@@ -205,6 +224,25 @@ def manual_js(onepage_w):
   window.addEventListener('scroll',function(){
     if(window.scrollY>600) btn.classList.add('show'); else btn.classList.remove('show');
   },{passive:true});
+  window.pdfMenu=function(e){
+    e.stopPropagation();
+    var box=document.getElementById('heroPdf');
+    if(!box)return;
+    var abrindo=!box.classList.contains('open');
+    box.classList.toggle('open',abrindo);
+    var b=box.querySelector('.hero-export');
+    if(b)b.setAttribute('aria-expanded',abrindo?'true':'false');
+  };
+  document.addEventListener('click',function(e){
+    var box=document.getElementById('heroPdf');
+    if(box&&!box.contains(e.target)){box.classList.remove('open');
+      var b=box.querySelector('.hero-export');if(b)b.setAttribute('aria-expanded','false');}
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape')return;
+    var box=document.getElementById('heroPdf');
+    if(box)box.classList.remove('open');
+  });
   window.exportPDF=function(){
     document.body.classList.add('printing');
     requestAnimationFrame(function(){requestAnimationFrame(function(){
@@ -267,19 +305,22 @@ def manual_js(onepage_w):
     fs.setAttribute('data-edge', l<=1?'right':(l>=max-1?'left':'both'));
   }
   if(fs){
-    var down=false,sx=0,sl=0,moved=false;
+    var down=false,sx=0,sl=0,moved=false,pid=null;
     fs.addEventListener('pointerdown',function(e){
       if(e.pointerType==='touch'||!fs.classList.contains('scrollable'))return;
-      down=true;moved=false;sx=e.clientX;sl=fs.scrollLeft;e.preventDefault();
-      try{fs.setPointerCapture(e.pointerId);}catch(_){}
+      down=true;moved=false;sx=e.clientX;sl=fs.scrollLeft;pid=e.pointerId;
     });
     fs.addEventListener('pointermove',function(e){
       if(!down)return;
       var dx=e.clientX-sx;
-      if(Math.abs(dx)>5){moved=true;fs.classList.add('dragging');}
+      /* captura o ponteiro so depois do limiar de arrasto: capturar ja no
+         pointerdown redireciona o click para a barra e mata a ancora */
+      if(!moved&&Math.abs(dx)>5){moved=true;fs.classList.add('dragging');try{fs.setPointerCapture(pid);}catch(_){}}
+      if(!moved)return;
+      e.preventDefault();
       fs.scrollLeft=sl-dx;
     });
-    function endDrag(){if(down){down=false;fs.classList.remove('dragging');}}
+    function endDrag(){if(down){down=false;fs.classList.remove('dragging');try{fs.releasePointerCapture(pid);}catch(_){}pid=null;}}
     fs.addEventListener('dragstart',function(e){e.preventDefault();});
     fs.addEventListener('pointerup',endDrag);
     fs.addEventListener('pointercancel',endDrag);
@@ -293,10 +334,28 @@ def manual_js(onepage_w):
 </script>
 """)
 
-def hero_top():
-    return (MARK + """
+def hero_top(prod, slug):
+    """Botao de exportar. Com PDFs prontos declarados em DOWNLOADS, vira um menu de
+    versoes; sem eles, segue chamando a impressao do navegador, como nos manuais da IC."""
+    versoes = DOWNLOADS.get(prod + "/" + slug)
+    if not versoes:
+        return (MARK + """
     <div class="hero-top">
       <button class="hero-export" type="button" onclick="exportPDF()">""" + SVG_EXPORT + """ Exportar PDF</button>
+    </div>
+    """)
+
+    itens = ""
+    for rotulo, descricao, href in versoes:
+        itens += ('        <a href="%s" download><strong>%s</strong><span>%s</span></a>\n'
+                  % (href, rotulo, descricao))
+    return (MARK + """
+    <div class="hero-top">
+      <div class="hero-pdf" id="heroPdf">
+        <button class="hero-export" type="button" onclick="pdfMenu(event)" aria-haspopup="true" aria-expanded="false">""" + SVG_EXPORT + """ Exportar PDF """ + SVG_CHEVRON + """</button>
+        <div class="hero-pdf-menu">
+""" + itens + """        </div>
+      </div>
     </div>
     """)
 
@@ -354,7 +413,7 @@ def patch_manual(path, fn, label, old_mw, new_mw, onepage_w, prod):
 
     # 4) hero-top antes do titulo
     assert html.count('<div class="header-title">') == 1
-    html = html.replace('<div class="header-title">', hero_top() + '<div class="header-title">', 1)
+    html = html.replace('<div class="header-title">', hero_top(prod, fn) + '<div class="header-title">', 1)
 
     # 5) breadcrumb (home + atual-dropdown) na mesma linha das secoes;
     #    tira overflow do flow-bar (senao dropdown corta) e poe num wrapper de steps
