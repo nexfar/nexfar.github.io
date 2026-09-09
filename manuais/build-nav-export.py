@@ -38,13 +38,16 @@ PRODUCTS = {
             ("catalogo-digital-sem-preco",      "Catálogo · Sem preço", 1125, 1125, 1157),
         ],
     },
-    "vendas": {
-        "nome": "Plataforma de Vendas",
-        "versao": "3.10",
-        "manuais": [
-            ("link-de-pagamento",               "Link de pagamento", 1125, 1125, 1157),
-        ],
-    },
+    # Plataforma de Vendas — o manual do Link de pagamento esta em validacao local e
+    # ainda nao vai ao ar. Para trabalhar nele, descomente e sirva a raiz do clone; para
+    # publicar, descomente aqui e devolva a pasta /vendas/ ao versionamento.
+    # "vendas": {
+    #     "nome": "Plataforma de Vendas",
+    #     "versao": "3.10",
+    #     "manuais": [
+    #         ("link-de-pagamento",             "Link de pagamento", 1125, 1125, 1157),
+    #     ],
+    # },
 }
 
 def product_dir(prod):
