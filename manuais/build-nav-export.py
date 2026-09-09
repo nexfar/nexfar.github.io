@@ -13,7 +13,6 @@ import os, re, base64
 
 HERE = os.path.dirname(os.path.abspath(__file__))       # .../manuais
 ROOT = os.path.dirname(HERE)                            # raiz do repo (nexfar.github.io)
-IC_DIR = os.path.join(ROOT, "ic")                       # /ic (manuais IC, slugs limpos)
 ASSETS = os.path.join(HERE, "assets")
 
 def nexfar_logo_img():
@@ -22,15 +21,40 @@ def nexfar_logo_img():
     return ('<img src="data:image/svg+xml;base64,' + b64 +
             '" alt="Nexfar" style="height:30px;width:auto;display:block;margin-bottom:18px">')
 
-# slug -> (label curto p/ dropdown, old_maxwidth, new_maxwidth, onepage_print_width)
-# arquivo = /ic/<slug>.html ; URL de producao = /ic/<slug> (GitHub Pages serve .html)
-MANUALS = [
-    ("objetivos-e-sugestoes",          "Objetivos · Com meta",  900, 1125, 1157),
-    ("objetivos-e-sugestoes-sem-meta",  "Objetivos · Sem meta",  900, 1125, 1157),
-    ("cotacao-agil",                    "Cotação Ágil", 1125, 1125, 1157),
-    ("catalogo-digital",                "Catálogo · Com preço", 1125, 1125, 1157),
-    ("catalogo-digital-sem-preco",      "Catálogo · Sem preço", 1125, 1125, 1157),
-]
+# Um produto por pasta na raiz do repo. Cada manual e uma tupla
+# (slug, label curto p/ dropdown, old_maxwidth, new_maxwidth, onepage_print_width).
+# arquivo = /<produto>/<slug>.html ; URL de producao = /<produto>/<slug>
+# (GitHub Pages serve o .html). A versao e a que aparece no banner do manual — cada
+# produto tem a sua, entao ela nao pode viver num literal unico.
+PRODUCTS = {
+    "ic": {
+        "nome": "Inteligência Comercial",
+        "versao": "0.6.0",
+        "manuais": [
+            ("objetivos-e-sugestoes",           "Objetivos · Com meta",  900, 1125, 1157),
+            ("objetivos-e-sugestoes-sem-meta",  "Objetivos · Sem meta",  900, 1125, 1157),
+            ("cotacao-agil",                    "Cotação Ágil", 1125, 1125, 1157),
+            ("catalogo-digital",                "Catálogo · Com preço", 1125, 1125, 1157),
+            ("catalogo-digital-sem-preco",      "Catálogo · Sem preço", 1125, 1125, 1157),
+        ],
+    },
+    "vendas": {
+        "nome": "Plataforma de Vendas",
+        "versao": "3.10",
+        "manuais": [
+            ("link-de-pagamento",               "Link de pagamento", 1125, 1125, 1157),
+        ],
+    },
+}
+
+def product_dir(prod):
+    return os.path.join(ROOT, prod)
+
+def all_manuals():
+    """(produto, slug, label, old_mw, new_mw, onepage_w) de todos os produtos."""
+    for prod, cfg in PRODUCTS.items():
+        for slug, label, old_mw, new_mw, w in cfg["manuais"]:
+            yield prod, slug, label, old_mw, new_mw, w
 
 MARK = "<!--NAVEXPORT-->"
 CSS_MARK = "/* NAVEXPORT */"
@@ -262,14 +286,15 @@ def hero_top():
     </div>
     """)
 
-def breadcrumb(current):
+def breadcrumb(current, prod):
+    # O dropdown lista so os manuais do mesmo produto — misturar produtos confunde.
     menu = ""
     cur_label = current
-    for slug, label, _o, _n, _w in MANUALS:
+    for slug, label, _o, _n, _w in PRODUCTS[prod]["manuais"]:
         if slug == current:
             cur_label = label
         cls = ' class="current"' if slug == current else ""
-        menu += '          <a href="/ic/%s"%s>%s</a>\n' % (slug, cls, label)
+        menu += '          <a href="/%s/%s"%s>%s</a>\n' % (prod, slug, cls, label)
     return (MARK + '''    <div class="crumb">
       <a class="crumb-home" href="/manuais/">''' + SVG_BACK + ''' Manuais</a>
       <span class="crumb-sep">/</span>
@@ -281,7 +306,7 @@ def breadcrumb(current):
     </div>
 ''')
 
-def patch_manual(path, fn, label, old_mw, new_mw, onepage_w):
+def patch_manual(path, fn, label, old_mw, new_mw, onepage_w, prod):
     with open(path, encoding="utf-8") as f:
         html = f.read()
     if MARK in html or CSS_MARK in html:
@@ -293,7 +318,8 @@ def patch_manual(path, fn, label, old_mw, new_mw, onepage_w):
     # 1b) barra de versao: tira do topo, joga pro footer (border-bottom -> border-top)
     banner = ('<div style="background:#ede9f8;border-bottom:1px solid #c4aeef;color:#5b2da0;'
               'padding:9px 24px;font-size:13px;text-align:center;font-weight:600">'
-              '✓ Este manual está atualizado de acordo com a versão 0.6.0</div>')
+              '✓ Este manual está atualizado de acordo com a versão '
+              + PRODUCTS[prod]["versao"] + '</div>')
     assert banner in html, "banner de versao nao encontrado em " + fn
     html = html.replace(banner, "", 1)
     assert "<footer>" in html
@@ -327,7 +353,7 @@ def patch_manual(path, fn, label, old_mw, new_mw, onepage_w):
     j = html.find(close, after)
     assert j != -1, "fechamento do flow-bar nao encontrado em " + fn
     steps_html = html[after:j]
-    html = (html[:after] + breadcrumb(fn) + '    <div class="flow-steps">\n'
+    html = (html[:after] + breadcrumb(fn, prod) + '    <div class="flow-steps">\n'
             + steps_html + '\n    </div>' + html[j:])
 
     # 6) remove o scrollspy original (so existe em cotacao/catalogo) p/ nao brigar
@@ -371,9 +397,14 @@ INDEX_CSS = CSS_MARK + """
 """
 
 def index_modal_html():
+    # Com mais de um produto no site, o rotulo carrega o nome do produto: "Cotação Ágil"
+    # e "Link de pagamento" lado a lado, sem contexto, nao dizem de onde saem.
     items = ""
-    for slug, label, _o, _n, _w in MANUALS:
-        items += '      <label><input type="checkbox" value="/ic/%s.html" checked> %s</label>\n' % (slug, label)
+    varios = len(PRODUCTS) > 1
+    for prod, slug, label, _o, _n, _w in all_manuals():
+        texto = (PRODUCTS[prod]["nome"] + " · " + label) if varios else label
+        items += ('      <label><input type="checkbox" value="/%s/%s.html" checked> %s</label>\n'
+                  % (prod, slug, texto))
     return (MARK + """
 <div class="modal-ov" id="pdfModal">
   <div class="modal">
@@ -504,17 +535,21 @@ def patch_index(path):
         html = html.replace('href="' + old + '"',  'href="/ic/' + slug + '"')
         html = html.replace('value="' + old + '"', 'value="/ic/' + slug + '.html"')
 
+    # Produtos que nasceram depois da primeira passada ja entram na home com a URL de
+    # producao escrita a mao — nao ha nome de arquivo antigo para reescrever.
+
     with open(path, "w", encoding="utf-8") as f:
         f.write(html)
     return "ok"
 
 def main():
-    print("== manuais ==")
-    for slug, label, old_mw, new_mw, w in MANUALS:
-        p = os.path.join(IC_DIR, slug + ".html")
-        if not os.path.exists(p):
-            print("  MISSING", slug); continue
-        print("  %-34s %s" % (slug, patch_manual(p, slug, label, old_mw, new_mw, w)))
+    for prod, cfg in PRODUCTS.items():
+        print("== manuais · %s ==" % cfg["nome"])
+        for slug, label, old_mw, new_mw, w in cfg["manuais"]:
+            p = os.path.join(product_dir(prod), slug + ".html")
+            if not os.path.exists(p):
+                print("  MISSING", slug); continue
+            print("  %-34s %s" % (slug, patch_manual(p, slug, label, old_mw, new_mw, w, prod)))
     print("== pagina pai ==")
     print("  %-42s %s" % ("index.html", patch_index(os.path.join(HERE, "index.html"))))
 
