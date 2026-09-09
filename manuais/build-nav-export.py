@@ -50,6 +50,17 @@ PRODUCTS = {
     # },
 }
 
+# Manual em validacao entra por aqui, sem passar pelo versionamento: um
+# `produtos-locais.json` ao lado deste script, no mesmo formato de PRODUCTS, e mesclado
+# quando existe. E o que permite servir e conferir a pagina antes de ela ir ao ar.
+_LOCAIS = os.path.join(HERE, "produtos-locais.json")
+if os.path.exists(_LOCAIS):
+    import json
+    with open(_LOCAIS, encoding="utf-8") as _f:
+        for _prod, _cfg in json.load(_f).items():
+            _cfg["manuais"] = [tuple(m) for m in _cfg["manuais"]]
+            PRODUCTS[_prod] = _cfg
+
 def product_dir(prod):
     return os.path.join(ROOT, prod)
 
