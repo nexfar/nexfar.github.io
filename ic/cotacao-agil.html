@@ -268,6 +268,8 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <a href="/ic/objetivos-e-sugestoes-sem-meta">Objetivos · Sem meta</a>
           <a href="/ic/cotacao-agil" class="current">Cotação Ágil</a>
           <a href="/ic/catalogo-digital">Catálogo Digital</a>
+          <a href="/ic/offline-e-sincronizacao">Modo offline e sincronização</a>
+          <a href="/ic/acompanhamento-jbp">Acompanhamento JBP</a>
         </div>
       </div>
     </div>
@@ -301,7 +303,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">1</div>
             <div class="step-body">
               <div class="step-title">Abra a Inteligência Comercial</div>
-              <div class="step-text">Acesse pelo link do seu distribuidor ou pelo botão na Plataforma de Vendas. O login é automático via Login Unificado.</div>
+              <div class="step-text">Acesse pelo link do seu distribuidor ou pelo botão na Plataforma de Vendas. O login é automático via Login Unificado. O primeiro acesso precisa de internet; depois disso, o app abre mesmo sem rede, com a sessão salva no aparelho. No canto direito do topo, o selo de conexão mostra se você está <strong>Online</strong>, <strong>Offline</strong>, com <strong>Sinal fraco</strong> ou <strong>Sincronizando</strong>.</div>
               <p style="font-size:12px;color:#9ca3af;margin-top:6px">Obs.: endereço no formato <code style="font-size:11px;background:#f3f4f6;border-radius:3px;padding:1px 4px;color:#6b7280">distribuidor.ic.nexfar.com.br</code>, onde "distribuidor" é o nome do seu distribuidor.</p>
             </div>
           </div>
@@ -323,7 +325,14 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">4</div>
             <div class="step-body">
               <div class="step-title">Busque e filtre</div>
-              <div class="step-text">Use a busca por <strong>CNPJ ou Nome Fantasia</strong> e o <code>Filtro</code> para encontrar uma cotação específica. Para criar uma nova, toque em <code>+ Criar Nova Cotação</code> no topo.</div>
+              <div class="step-text">Use a busca por <strong>CNPJ ou Nome Fantasia</strong> e o <code>Filtro</code> para encontrar uma cotação específica. No filtro, a seção <strong>Sincronização</strong> separa as cotações em <strong>Aguardando sincronização</strong>, <strong>Falha ao sincronizar</strong> e <strong>Sincronizadas recentemente</strong>. Para criar uma nova, toque em <code>+ Criar Nova Cotação</code> no topo.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <div class="step-title">Sem internet, a lista continua aberta</div>
+              <div class="step-text">A lista mostra as cotações salvas no aparelho, com o aviso <em>"Sem conexão. Mostrando as cotações salvas no aparelho, de &lt;quando&gt;. Cotações criadas depois disso podem não aparecer aqui."</em> As cotações feitas sem rede aparecem com o card <em>"Aguardando sincronização. A cotação está salva e será atualizada quando houver conexão com a internet."</em> No topo, a faixa <strong>"N cotações aguardando sincronização"</strong> lembra que elas são atualizadas sozinhas quando a conexão voltar. Toque em <code>Ver</code> para encontrá-las.</div>
             </div>
           </div>
         </div>
@@ -333,6 +342,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <tr><th style="width:150px">Status</th><th>O que significa</th></tr>
           <tr><td><span class="badge badge-purple">🗂 Aberta</span></td><td>Cotação pronta, com os preços disponíveis para revisão. Pode virar pedido a qualquer momento.</td></tr>
           <tr><td><span class="badge badge-blue">🕐 Rascunho</span></td><td>Cotação ainda em processamento <em>ou</em> parada esperando uma ação sua. Ver <a href="#s5">etapa 5</a>.</td></tr>
+          <tr><td><span class="badge badge-orange">⏳ Aguardando sincronização</span></td><td>Cotação criada sem internet e salva no aparelho. É atualizada sozinha quando a conexão voltar. Não pode ser retomada nem editada.</td></tr>
           <tr><td><span class="badge badge-green">🛍 Convertida</span></td><td>A cotação já virou pedido na Plataforma de Vendas.</td></tr>
           <tr><td><span class="badge badge-gray">📁 Arquivada</span></td><td>Cotação encerrada por tempo ou pelo distribuidor; fica só como histórico.</td></tr>
         </table>
@@ -340,6 +350,14 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
         <div class="callout callout-info" style="margin-top:12px">
           <span class="callout-icon">ℹ️</span>
           <div class="callout-body"><strong>Cotações em Rascunho pedem atenção:</strong> o card mostra um aviso próprio. Roxo (<em>"Esta cotação está em processamento, você pode acessar para acompanhar o progresso"</em>) quer dizer que é só aguardar. Amarelo ou vermelho com <strong>"Ação necessária"</strong> quer dizer que a cotação parou e precisa de você.</div>
+        </div>
+        <div class="callout callout-warn" style="margin-top:8px">
+          <span class="callout-icon">⏳</span>
+          <div class="callout-body"><strong>Cotação aguardando sincronização:</strong> o menu <code>⋮</code> (Mais opções) traz <strong>Tentar enviar de novo</strong> e <strong>Descartar cotação</strong>. O descarte não pode ser desfeito. Essa cotação não pode ser retomada nem editada: para mudar algo, descarte e faça de novo.</div>
+        </div>
+        <div class="callout callout-info" style="margin-top:8px">
+          <span class="callout-icon">📶</span>
+          <div class="callout-body"><strong>A Cotação Ágil funciona sem internet.</strong> É o único módulo que segue funcionando offline. O app não sincroniza mais sozinho ao abrir: a sincronização começa quando você pede (pelo selo de conexão, pelo item <strong>Sincronizar dados</strong> do menu lateral ou em <strong>Sincronizar tudo</strong>) ou quando uma tela precisa de dados que o aparelho ainda não tem. Se os dados forem de outro dia, aparece o aviso <strong>Sincronização pendente</strong>, com a data da última sincronização e o botão <code>Sincronizar agora</code>. Sem rede, <strong>Sair da conta</strong> fica desabilitado. Veja os detalhes no manual <a href="/ic/offline-e-sincronizacao">Modo offline e sincronização</a>.</div>
         </div>
       </div>
       <div class="screen-col">
@@ -403,6 +421,10 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <div class="callout-body"><strong>Dá para voltar sem perder nada:</strong> voltar um passo preserva o que você já preencheu — arquivos anexados, áudio gravado, produtos digitados e as escolhas dos Ajustes.</div>
         </div>
         <div class="callout callout-info" style="margin-top:8px">
+          <span class="callout-icon">📶</span>
+          <div class="callout-body"><strong>Sem internet, você cria a cotação do mesmo jeito.</strong> Nos três formatos, a tela mostra a faixa <strong>"Sem internet."</strong> e avisa que o material ficou salvo no aparelho — os arquivos, o áudio ou a lista. No formato manual, por exemplo: <em>"A lista está salva e você pode continuar. A cotação será atualizada quando houver conexão com a internet."</em> O que foi salvo traz a marca <em>· no aparelho</em>. Base e tabela continuam opcionais: se ficarem em branco, a melhor condição é aplicada quando a cotação for enviada.</div>
+        </div>
+        <div class="callout callout-info" style="margin-top:8px">
           <span class="callout-icon">ℹ️</span>
           <div class="callout-body"><strong>Supervisor com papel duplo:</strong> se você acumula supervisão e venda, a busca de cliente enxerga toda a sua hierarquia — os clientes dos vendedores subordinados, em qualquer nível, também aparecem para cotar.</div>
         </div>
@@ -424,7 +446,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
               <div class="step-num">1</div>
               <div class="step-body">
                 <div class="step-title">Envie arquivos ou fotos</div>
-                <div class="step-text">Em "Arquivos e fotos", toque em <code>Selecionar arquivos ou fotos</code>. Suba a planilha/lista com os produtos ou use a câmera para fotografar a lista do cliente — a Inteligência Comercial identifica os itens para você. Toque em <strong>Formatos suportados</strong> para ver os tipos aceitos.</div>
+                <div class="step-text">Em "Arquivos e fotos", toque em <code>Selecionar arquivos ou fotos</code>. Suba a planilha/lista com os produtos ou use a câmera para fotografar a lista do cliente — a Inteligência Comercial identifica os itens para você. Toque em <strong>Formatos suportados</strong> para ver os tipos aceitos. Além de fotos e PDF, valem planilhas (.xls, .xlsx, .ods), documentos (.doc, .docx, .rtf, .odt) e áudios (.ogg, .opus, .m4a, .aac, .flac, .wma).</div>
               </div>
             </div>
             <div class="step">
@@ -465,7 +487,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
               <div class="step-num">1</div>
               <div class="step-body">
                 <div class="step-title">Grave o áudio</div>
-                <div class="step-text">Toque no microfone e dite <strong>o CNPJ do cliente e os produtos</strong> que deseja cotar. Fale nome, EAN ou descrição e quantidade de cada item. O contador mostra a duração da gravação.</div>
+                <div class="step-text">Toque no microfone e dite <strong>o CNPJ do cliente e os produtos</strong> que deseja cotar. Fale nome, EAN ou descrição e quantidade de cada item. Pode dizer os números por extenso: "doze caixas" vira 12. O contador mostra a duração da gravação.</div>
               </div>
             </div>
             <div class="step">
@@ -506,7 +528,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
               <div class="step-num">1</div>
               <div class="step-body">
                 <div class="step-title">Informe o cliente</div>
-                <div class="step-text">No campo <strong>CNPJ ou Nome Fantasia</strong>, digite o cliente para quem está cotando. A busca traz apenas clientes da sua carteira e reconhece o CNPJ mesmo parcial ou mascarado.</div>
+                <div class="step-text">No campo <strong>CNPJ ou Nome Fantasia</strong>, digite o cliente para quem está cotando. A busca traz apenas clientes da sua carteira e reconhece o CNPJ mesmo parcial ou mascarado. Pelo nome, ela ignora maiúsculas e acentos e mostra até 10 clientes relacionados ao termo. Sem internet, a busca usa a carteira sincronizada no aparelho: por nome em carteiras de até 1.000 clientes; acima disso, por CNPJ.</div>
               </div>
             </div>
             <div class="step">
@@ -617,7 +639,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">B</div>
             <div class="step-body">
               <div class="step-title">Ignorar o item</div>
-              <div class="step-text">Não considera o item na cotação.</div>
+              <div class="step-text">Não considera o item na cotação. Se nenhum item tiver quantidade, nada é cotado e a tela avisa: <em>"Nenhum produto foi cotado, pois você optou por ignorar itens sem quantidade especificada…"</em></div>
             </div>
           </div>
         </div>
@@ -701,6 +723,10 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <span class="callout-icon">💰</span>
           <div class="callout-body"><strong>Segue suas escolhas da etapa Ajustes:</strong> se você marcou "Priorizar menor preço", o equivalente mais barato disponível entra no lugar do item pedido — respeitando princípio, dosagem, forma, apresentação, categoria e tamanho da embalagem. Se marcou "Manter item mais compatível", o item casado é mantido sem troca por preço.</div>
         </div>
+        <div class="callout callout-info" style="margin-top:8px">
+          <span class="callout-icon">📶</span>
+          <div class="callout-body"><strong>Sem internet, a cotação fica salva no aparelho.</strong> No lugar dos estágios, a tela mostra <strong>"Cotação salva no aparelho"</strong>: <em>"Ela será atualizada e aparece na sua listagem quando houver conexão com a internet. Você não precisa fazer nada. Pode atender o próximo cliente normalmente."</em> Quando a conexão volta e a cotação é processada, um aviso confirma: <em>"Cotação #N da &lt;cliente&gt; ficou pronta — N produtos identificados"</em>, ou <em>"N cotações ficaram prontas"</em> com o botão <code>Ver listagem</code>. O app só diz que a cotação foi enviada depois que o servidor confirma.</div>
+        </div>
       </div>
       <div class="screen-col">
         <div>
@@ -728,7 +754,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
               <div class="step-num">B</div>
               <div class="step-body">
                 <div class="step-title">Erro ao ler os insumos</div>
-                <div class="step-text">Quando o arquivo, a foto, o áudio ou o texto não puderam ser lidos, a cotação volta para a tela de inserção de produtos <strong>com o que você já tinha enviado preservado</strong>. Corrija ou troque o material e avance de novo.</div>
+                <div class="step-text">Quando o arquivo, a foto, o áudio ou o texto não puderam ser lidos, a cotação volta para a tela de inserção de produtos <strong>com o que você já tinha enviado preservado</strong> — mesmo que você abra a cotação em outro aparelho. Corrija ou troque o material e avance de novo.</div>
               </div>
             </div>
           </div>
@@ -783,14 +809,14 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">2</div>
             <div class="step-body">
               <div class="step-title">Retome de onde parou</div>
-              <div class="step-text">Toque no card e você vai direto para o passo da pendência: a tela de <strong>CNPJ</strong>, ou a tela de <strong>inserção de produtos com os insumos originais preservados</strong> (arquivos anexados, áudio gravado, texto colado).</div>
+              <div class="step-text">Toque no card e você vai direto para o passo da pendência: a tela de <strong>CNPJ</strong>, ou a tela de <strong>inserção de produtos com os insumos originais preservados</strong> (arquivos anexados, áudio gravado, texto colado), mesmo em outro aparelho. Em cotações antigas, os arquivos podem não estar mais disponíveis. Nesse caso, a tela avisa: <em>"Não conseguimos recuperar os arquivos desta cotação. Envie os insumos novamente para tentar de novo."</em></div>
             </div>
           </div>
         </div>
 
         <div class="callout callout-info" style="margin-top:8px">
           <span class="callout-icon">ℹ️</span>
-          <div class="callout-body"><strong>Como uma cotação vira Rascunho:</strong> ao usar <code>Voltar para a página inicial</code> durante o processamento, ou quando o processamento para por CNPJ não identificado ou erro de leitura dos insumos.</div>
+          <div class="callout-body"><strong>Como uma cotação vira Rascunho:</strong> ao usar <code>Voltar para a página inicial</code> durante o processamento, quando o processamento é interrompido no meio do caminho, ou quando ele para por CNPJ não identificado ou erro de leitura dos insumos. Em todos os casos, dá para retomar. Cotação criada sem internet não é Rascunho: ela aparece como <strong>Aguardando sincronização</strong> até a conexão voltar (ver <a href="#s1">etapa 1</a>).</div>
         </div>
       </div>
       <div class="screen-col">
@@ -853,7 +879,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">6</div>
             <div class="step-body">
               <div class="step-title">Item substituído por equivalente</div>
-              <div class="step-text">Quando a Inteligência Comercial troca um item — por menor preço ou por falta de estoque, conforme seus <strong>Ajustes</strong> — o produto entra sinalizado como substituído. A sinalização é automática: você sempre vê o que mudou em relação ao pedido original.</div>
+              <div class="step-text">Quando a Inteligência Comercial troca um item, conforme seus <strong>Ajustes</strong>, o produto entra com uma faixa azul: <strong>"O sistema substituiu &lt;nome digitado ou importado&gt; — &lt;motivo&gt;"</strong>. O motivo é <em>sem estoque</em>, <em>equivalente de menor preço</em> ou <em>sem preço disponível</em>. A troca por menor preço, que antes acontecia sem aviso, agora também aparece. Troca automática não tem <code>Desfazer</code>. Quando é você quem troca o item, a faixa mostra <strong>"Substituiu &lt;nome&gt;"</strong>, com a opção <code>Desfazer</code>.</div>
             </div>
           </div>
           <div class="step">
@@ -1078,23 +1104,38 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">Toque em "Prosseguir para checkout"</div>
-            <div class="step-text">Botão primário no rodapé da cotação. O carrinho é montado na Plataforma de Vendas com os produtos e quantidades da cotação, sem travas. Se algum item específico não puder ser adicionado, um aviso claro indica qual — os demais seguem normalmente.</div>
+            <div class="step-text">Botão primário no rodapé da cotação. O carrinho é montado na Plataforma de Vendas com os produtos e quantidades da cotação. Se algum item específico não puder ser adicionado, um aviso claro indica qual — os demais seguem normalmente. Quantidade acima do estoque é ajustada, com o aviso <em>"N produtos tiveram a quantidade ajustada pelo estoque disponível"</em>.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Se o cliente já tem um carrinho, escolha o que fazer</div>
+            <div class="step-text">Abre a janela <strong>"Este cliente já tem um carrinho ativo"</strong>, com o resumo <em>"Carrinho atual: N itens · R$…"</em> e a pergunta <em>"O que você quer fazer com a cotação que está convertendo?"</em><ul style="margin:6px 0 0 14px;line-height:1.8"><li><code>Substituir carrinho</code>: descarta os itens atuais e cria um novo carrinho.</li><li><code>Adicionar a este carrinho</code>: mantém os itens atuais. Item que já está no carrinho fica com a quantidade desta cotação.</li><li><code>Cancelar</code>: volta para a cotação sem mexer no carrinho.</li></ul></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
           <div class="step-body">
             <div class="step-title">Revise o carrinho</div>
             <div class="step-text">Na Plataforma de Vendas você pode ajustar quantidades, adicionar mais produtos ou remover itens antes de confirmar.</div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">3</div>
+          <div class="step-num">4</div>
           <div class="step-body">
             <div class="step-title">Confirme o pedido</div>
             <div class="step-text">O pedido segue o fluxo padrão da Plataforma de Vendas. A cotação passa a aparecer na lista como <span class="badge badge-green">🛍 Convertida</span>.</div>
           </div>
         </div>
+      </div>
+      <div class="callout callout-tip" style="margin-top:12px">
+        <span class="callout-icon">🛒</span>
+        <div class="callout-body"><strong>Nenhum carrinho se perde:</strong> ao escolher <code>Substituir carrinho</code>, o carrinho antigo só é descartado depois que o novo já existe.</div>
+      </div>
+      <div class="callout callout-info" style="margin-top:8px">
+        <span class="callout-icon">🏬</span>
+        <div class="callout-body"><strong>Cotação sem base escolhida pode gerar mais de um carrinho.</strong> Quando os itens saem de filiais diferentes, a cotação cria um carrinho por filial. O aviso <em>"Foram criados N carrinhos (um por filial)…"</em> confirma, e você é levado ao primeiro.</div>
       </div>
       <div class="highlight">
         <div class="highlight-title">Fluxo completo da Cotação Ágil:</div>
@@ -1111,7 +1152,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <span class="flow-arrow-icon">→</span>
           <div class="flow-box gray">Plataforma de Vendas</div>
         </div>
-        <p style="font-size:13px;color:#6b7280;margin-top:4px">Sair durante o processamento não quebra o fluxo: a cotação vira <strong>Rascunho</strong> e você retoma pela lista, do ponto em que parou.</p>
+        <p style="font-size:13px;color:#6b7280;margin-top:4px">Sair durante o processamento não quebra o fluxo: a cotação vira <strong>Rascunho</strong> e você retoma pela lista, do ponto em que parou. Sem internet, ela fica salva no aparelho e segue sozinha quando a conexão voltar.</p>
       </div>
     </div>
   </div>
@@ -1147,11 +1188,23 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
       </div>
       <div class="faq-item">
         <div class="faq-q">Deu "Erro ao ler os insumos" — perdi os arquivos que enviei?</div>
-        <div class="faq-a">Não. Ao abrir a cotação, você volta para a tela de inserção com os insumos originais preservados: arquivos anexados, áudio gravado ou o texto que você colou. Corrija ou substitua o material e avance de novo.</div>
+        <div class="faq-a">Não. Ao abrir a cotação, você volta para a tela de inserção com os insumos originais preservados: arquivos anexados, áudio gravado ou o texto que você colou — mesmo em outro aparelho. Corrija ou substitua o material e avance de novo. Só em cotações antigas os arquivos podem não estar mais disponíveis; aí, envie os insumos de novo.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Por que o menu ⋮ está desabilitado em algumas cotações?</div>
         <div class="faq-a">Porque a cotação está em processamento e não há ação a tomar nesse momento. Basta tocar no card para acompanhar o progresso. Quando a cotação exige uma ação sua, o menu fica habilitado.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso fazer cotação sem internet?</div>
+        <div class="faq-a">Pode. A Cotação Ágil é o único módulo que funciona offline: você cria a cotação nos três formatos e ela fica salva no aparelho. Quando a conexão voltar, ela é enviada sozinha e aparece pronta na sua lista.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Por que minha cotação está "Aguardando sincronização"?</div>
+        <div class="faq-a">Porque ela foi criada sem internet e ainda não chegou ao servidor. Ela é atualizada sozinha quando a conexão voltar. Se a sincronização falhar, use <strong>Tentar enviar de novo</strong> no menu <code>⋮</code>.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso editar uma cotação que está aguardando sincronização?</div>
+        <div class="faq-a">Não. Enquanto aguarda sincronização, a cotação não pode ser retomada nem editada. Para mudar algo, use <strong>Descartar cotação</strong> no menu <code>⋮</code> e faça de novo. O descarte não pode ser desfeito.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Qual a diferença entre "Sem estoque", "Não encontrado" e "Venda bloqueada"?</div>
@@ -1163,7 +1216,11 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
       </div>
       <div class="faq-item">
         <div class="faq-q">Por que o produto pré-selecionado às vezes é diferente do que pedi?</div>
-        <div class="faq-a">Depende do que você escolheu na etapa <strong>Ajustes</strong>. Com "Priorizar menor preço", a cotação troca pelo equivalente mais barato disponível — sempre respeitando princípio ativo, dosagem, forma, apresentação, categoria e tamanho de embalagem. Com "Manter item mais compatível", não há troca por preço. Quando há troca, o item vem sinalizado como substituído.</div>
+        <div class="faq-a">Depende do que você escolheu na etapa <strong>Ajustes</strong>. Com "Priorizar menor preço", a cotação troca pelo equivalente mais barato disponível — sempre respeitando princípio ativo, dosagem, forma, apresentação, categoria e tamanho de embalagem. Com "Manter item mais compatível", não há troca por preço. Quando há troca, o item vem com a faixa azul "O sistema substituiu…" e o motivo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">O que significa a faixa azul "O sistema substituiu…"?</div>
+        <div class="faq-a">Que a Inteligência Comercial trocou o item pedido por um equivalente. A faixa mostra o nome original e o motivo: sem estoque, equivalente de menor preço ou sem preço disponível. Troca automática não tem <strong>Desfazer</strong>.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Posso fazer cotação para um cliente que não está na minha carteira?</div>
@@ -1172,6 +1229,10 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
       <div class="faq-item">
         <div class="faq-q">Posso criar a cotação e adicionar produtos depois?</div>
         <div class="faq-a">Sim. No formato manual, dá para criar a cotação sem produtos. Em qualquer cotação já criada, use <strong>Adicionar produtos</strong> (logo abaixo das abas) para incluir itens por busca manual ou importando arquivos. Os itens entram em ordem alfabética e a ordem se mantém após recarregar a tela.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">O que acontece se o cliente já tiver um carrinho?</div>
+        <div class="faq-a">Ao prosseguir para o checkout, a janela "Este cliente já tem um carrinho ativo" pergunta o que fazer: <strong>Substituir carrinho</strong>, <strong>Adicionar a este carrinho</strong> ou <strong>Cancelar</strong>. O carrinho antigo só é descartado depois que o novo existe.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Consigo remover uma cotação da lista?</div>
@@ -1194,10 +1255,10 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
 
 </div>
 
-<div style="background:#ede9f8;border-top:1px solid #c4aeef;color:#5b2da0;padding:9px 24px;font-size:13px;text-align:center;font-weight:600">✓ Este manual está atualizado de acordo com a versão 0.11.3</div>
+<div style="background:#ede9f8;border-top:1px solid #c4aeef;color:#5b2da0;padding:9px 24px;font-size:13px;text-align:center;font-weight:600">✓ Este manual está atualizado de acordo com a versão 1.0.0</div>
 <footer>
   Nexfar Inteligência Comercial &middot; Guia de Uso &middot; Cotação Ágil (com e sem ST)<br>
-  <span style="color:#c4aeef">Atualizado em setembro/2026 &middot; v0.11.3</span>
+  <span style="color:#c4aeef">Atualizado em outubro/2026 &middot; v1.0.0</span>
 </footer>
 
 

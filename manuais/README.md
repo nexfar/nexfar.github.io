@@ -43,4 +43,4 @@ Para reeditar layout: reverter os `.html` (`git checkout -- ...`), editar o scri
 
 ## Versão
 
-Manuais IC alinhados à versão **0.6.0** do produto (badge na seção IC da home).
+Manuais IC alinhados à versão **1.0.0** do produto (badge na seção IC da home).

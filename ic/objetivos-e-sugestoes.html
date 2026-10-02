@@ -276,6 +276,8 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <a href="/ic/objetivos-e-sugestoes-sem-meta">Objetivos · Sem meta</a>
           <a href="/ic/cotacao-agil">Cotação Ágil</a>
           <a href="/ic/catalogo-digital">Catálogo Digital</a>
+          <a href="/ic/offline-e-sincronizacao">Modo offline e sincronização</a>
+          <a href="/ic/acompanhamento-jbp">Acompanhamento JBP</a>
         </div>
       </div>
     </div>
@@ -307,7 +309,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">1</div>
             <div class="step-body">
               <div class="step-title">Abra a Inteligência Comercial</div>
-              <div class="step-text">Acesse pelo link do seu distribuidor ou pelo botão de acesso na Plataforma de Vendas. O login é automático, sem senha separada.</div>
+              <div class="step-text">Acesse pelo link do seu distribuidor ou pelo botão de acesso na Plataforma de Vendas. O login é automático, sem senha separada. O primeiro acesso precisa de internet; depois disso, o app abre mesmo sem rede, com a sessão salva no aparelho.</div>
               <p style="font-size:12px;color:#9ca3af;margin-top:6px">Obs.: endereço no formato <code style="font-size:11px;background:#f3f4f6;border-radius:3px;padding:1px 4px;color:#6b7280">distribuidor.ic.nexfar.com.br</code>, onde "distribuidor" é o nome do seu distribuidor.</p>
             </div>
           </div>
@@ -315,16 +317,20 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">2</div>
             <div class="step-body">
               <div class="step-title">Veja os módulos disponíveis</div>
-              <div class="step-text">A tela inicial exibe os módulos contratados pelo seu distribuidor. Os módulos disponíveis neste guia são: <strong>Objetivos e Sugestões</strong>, <strong>Cotação Ágil</strong> e <strong>Catálogo Digital</strong>.</div>
+              <div class="step-text">A tela inicial exibe os módulos contratados pelo seu distribuidor: <strong>Objetivos e Sugestões</strong>, <strong>Cotação Ágil</strong>, <strong>Catálogo Digital</strong> e, quando o distribuidor tem acordos JBP, <strong>Acompanhamento JBP</strong> (veja o manual <a href="/ic/acompanhamento-jbp">Acompanhamento JBP</a>). Sem internet, só a Cotação Ágil funciona: os outros módulos aparecem apagados e, ao tocar, o app avisa <em>"Objetivos e Sugestões precisa de internet. Ele volta assim que a conexão voltar. A Cotação Ágil continua funcionando."</em> Eles voltam sozinhos quando a rede volta.</div>
             </div>
           </div>
           <div class="step">
             <div class="step-num">3</div>
             <div class="step-body">
               <div class="step-title">Toque em "Objetivos e Sugestões"</div>
-              <div class="step-text">O card mostra um resumo dos seus objetivos ativos: Venda Total, Positivação de Clientes, Positivação de Produtos, Venda Indústria e Produtos por PDV. Toque para abrir o painel completo.</div>
+              <div class="step-text">O card mostra um resumo dos seus objetivos ativos, como Venda Total, Positivação de Clientes e Positivação de Produtos. Quais aparecem depende da configuração do seu distribuidor. Toque para abrir o painel completo.</div>
             </div>
           </div>
+        </div>
+        <div class="callout callout-info" style="margin-top:12px">
+          <span class="callout-icon">📶</span>
+          <div class="callout-body"><strong>Selo de conexão e sincronização:</strong> no canto direito do topo, o selo mostra <strong>Online</strong>, <strong>Offline</strong>, <strong>Sinal fraco</strong>, <strong>Sincronizando X de Y</strong> ou <strong>Verificando</strong>. Toque nele, ou em <strong>Sincronizar dados</strong> no menu lateral, para atualizar os dados. O app não sincroniza mais sozinho ao abrir. Se os dados forem de outro dia, aparece o aviso <strong>Sincronização pendente</strong>, com a data da última sincronização e o botão <code>Sincronizar agora</code>. Veja os detalhes no manual <a href="/ic/offline-e-sincronizacao">Modo offline e sincronização</a>.</div>
         </div>
       </div>
       <div class="screen-col">
@@ -364,6 +370,22 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="meta-card-name"><span class="meta-icon">🏭</span> Venda Indústria</div>
             <div class="meta-card-desc">Volume de vendas por fabricante parceiro. Exibe breakdown de desempenho por indústria. Aparece apenas se o distribuidor configurar.</div>
           </div>
+          <div class="meta-card ind">
+            <div class="meta-card-name"><span class="meta-icon">🗂️</span> Venda por categoria</div>
+            <div class="meta-card-desc">Venda de cada categoria de produto x o objetivo. Aparece um card por categoria, cada um com seu próprio atalho no menu lateral. Aparece apenas se o distribuidor configurar.</div>
+          </div>
+          <div class="meta-card prod">
+            <div class="meta-card-name"><span class="meta-icon">🏬</span> Mix distribuição</div>
+            <div class="meta-card-desc">Produtos distintos vendidos por filial x o objetivo. Mostra só as filiais em que você tem meta. Aparece apenas se o distribuidor configurar.</div>
+          </div>
+          <div class="meta-card cli">
+            <div class="meta-card-name"><span class="meta-icon">📍</span> Positivação de clientes – últimos 4 meses</div>
+            <div class="meta-card-desc">Clientes positivados numa janela móvel dos últimos 4 meses. Enquanto a janela não fecha, o card avisa <em>"Janela incompleta: N de 4 meses"</em>. Aparece apenas se o distribuidor configurar.</div>
+          </div>
+          <div class="meta-card prod">
+            <div class="meta-card-name"><span class="meta-icon">📦</span> Positivação de produtos – média de produtos por cliente positivado</div>
+            <div class="meta-card-desc">Média de produtos por cliente positivado x o objetivo. Aparece apenas se o distribuidor configurar.</div>
+          </div>
           <div class="meta-card pdv">
             <div class="meta-card-name"><span class="meta-icon">🧺</span> Produtos por PDV</div>
             <div class="meta-card-desc">Mede quantos clientes da sua carteira atingiram o número mínimo de produtos únicos comprados no período. Aparece apenas se o distribuidor configurar.</div>
@@ -375,12 +397,13 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
       <div class="divider" style="margin-top:0"></div>
       <div class="callout callout-info" style="margin-bottom:16px">
         <span class="callout-icon">ℹ️</span>
-        <div class="callout-body"><strong>Objetivos não configurados:</strong> Se um objetivo não for habilitado pelo distribuidor, ele não aparece no painel. Isso não afeta as sugestões de pedido.</div>
+        <div class="callout-body"><strong>Os cards dependem do seu distribuidor:</strong> o conjunto de objetivos é configurado por distribuidor. Se um objetivo não for habilitado, ele não aparece no painel. Isso não afeta as sugestões de pedido.</div>
       </div>
       <p style="font-weight:600;font-size:14px;color:#111827;margin-bottom:12px">Status de cada objetivo:</p>
       <div class="status-row"><span class="badge badge-green">Atingida</span><span style="font-size:14px;color:#4b5563;margin-left:8px">Objetivo atingido no período.</span></div>
       <div class="status-row"><span class="badge badge-orange">Pendente</span><span style="font-size:14px;color:#4b5563;margin-left:8px">Progresso abaixo do esperado para o período.</span></div>
       <div class="status-row"><span class="badge badge-red">Zerada/Em risco</span><span style="font-size:14px;color:#4b5563;margin-left:8px">Sem progresso ou ritmo que indica que o objetivo não será atingido no prazo.</span></div>
+      <p style="font-size:14px;color:#4b5563;margin-top:12px">Acima de 100%, a barra mostra a superação da meta. Objetivo sem meta definida mostra só o valor realizado: sem barra de progresso, e nunca zerado.</p>
     </div>
   </div>
 
@@ -634,7 +657,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">4</div>
             <div class="step-body">
               <div class="step-title">Potencial de Objetivos</div>
-              <div class="step-text">Bloco no rodapé mostrando como o pedido atual impacta os seus objetivos: Venda Total, Venda Indústria e Positivação de Produtos.</div>
+              <div class="step-text">Bloco no rodapé mostrando como o pedido atual impacta os seus objetivos: Venda Total, Venda Indústria e Positivação de Produtos. Nas barras de Venda Total e Venda Indústria, o pedido em edição conta <strong>sem ICMS-ST</strong>, igual ao realizado. O preço e o total do pedido continuam com ST.</div>
             </div>
           </div>
           <div class="step">
@@ -648,7 +671,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">6</div>
             <div class="step-body">
               <div class="step-title">Prosseguir p/ checkout</div>
-              <div class="step-text">Botão primário no rodapé. Abre a Plataforma de Vendas em nova aba com o carrinho já preenchido com todos os produtos e quantidades da sugestão.</div>
+              <div class="step-text">Botão primário no rodapé. Abre a Plataforma de Vendas em nova aba com o carrinho já preenchido com todos os produtos e quantidades da sugestão. Se o cliente já tem um carrinho ativo, o app pergunta antes o que fazer com ele (ver <a href="#s5">etapa 5</a>).</div>
             </div>
           </div>
         </div>
@@ -714,23 +737,34 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">Toque em "Prosseguir p/ checkout"</div>
-            <div class="step-text">Botão primário no rodapé da tela de Sugestão de Pedido. A Plataforma de Vendas abre em uma nova aba com o carrinho já preenchido com todos os produtos e quantidades.</div>
+            <div class="step-text">Botão primário no rodapé da tela de Sugestão de Pedido. A Plataforma de Vendas abre em uma nova aba com o carrinho já preenchido com todos os produtos e quantidades. Quantidade acima do estoque é ajustada, com o aviso <em>"N produtos tiveram a quantidade ajustada pelo estoque disponível"</em>.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Se o cliente já tem um carrinho, escolha o que fazer</div>
+            <div class="step-text">Se o cliente já tem um carrinho ativo, abre a janela <strong>"Este cliente já tem um carrinho ativo"</strong>, com o resumo <em>"Carrinho atual: N itens · R$…"</em>. Escolha o que fazer:<ul style="margin:6px 0 0 14px;line-height:1.8"><li><code>Substituir carrinho</code>: descarta os itens atuais e cria um novo carrinho.</li><li><code>Adicionar a este carrinho</code>: mantém os itens atuais. Item que já está no carrinho fica com a quantidade da sugestão.</li><li><code>Cancelar</code>: volta para a sugestão sem mexer no carrinho.</li></ul></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
           <div class="step-body">
             <div class="step-title">Revise o carrinho na Plataforma de Vendas</div>
             <div class="step-text">Você pode ajustar quantidades, adicionar mais produtos ou remover itens antes de confirmar. O pedido segue o fluxo normal da Plataforma de Vendas.</div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">3</div>
+          <div class="step-num">4</div>
           <div class="step-body">
             <div class="step-title">Confirme o pedido</div>
             <div class="step-text">Após confirmar na Plataforma de Vendas, as metas da Inteligência Comercial são atualizadas automaticamente com os valores do pedido assim que o faturamento for processado.</div>
           </div>
         </div>
+      </div>
+      <div class="callout callout-tip" style="margin-top:12px">
+        <span class="callout-icon">🛒</span>
+        <div class="callout-body"><strong>Nenhum carrinho se perde:</strong> ao escolher <code>Substituir carrinho</code>, o carrinho antigo só é descartado depois que o novo já existe.</div>
       </div>
       <div class="highlight">
         <div class="highlight-title">Fluxo completo da sugestão ao pedido:</div>
@@ -760,11 +794,11 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
     <div style="padding:0 28px 28px;counter-reset:faq-counter">
       <div class="faq-item">
         <div class="faq-q">Por que alguns objetivos não aparecem no painel?</div>
-        <div class="faq-a">Os objetivos exibidos dependem do que o distribuidor configurou no sistema. <em>Venda Indústria</em> e <em>Produtos por PDV</em> só aparecem quando o distribuidor os ativa. Isso não afeta o funcionamento das sugestões de pedido.</div>
+        <div class="faq-a">Os objetivos exibidos dependem do que o distribuidor configurou no sistema. <em>Venda Indústria</em>, <em>Produtos por PDV</em>, <em>Venda por categoria</em>, <em>Mix distribuição</em> e as positivações por janela de 4 meses ou por média só aparecem quando o distribuidor os ativa. Isso não afeta o funcionamento das sugestões de pedido.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Por que meu objetivo aparece zerado?</div>
-        <div class="faq-a">Há dois motivos possíveis: o distribuidor não configurou esse objetivo no sistema, ou os dados ainda estão sendo processados (pode levar até algumas horas após o faturamento). Em ambos os casos, o objetivo aparece como zero até a atualização.</div>
+        <div class="faq-a">Normalmente porque os dados ainda estão sendo processados, o que pode levar até algumas horas após o faturamento. Objetivo sem meta definida não aparece zerado: o card mostra só o valor realizado, sem barra. E objetivo que o distribuidor não configurou nem aparece no painel.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">O que significa o gráfico de Projeção?</div>
@@ -776,17 +810,29 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
       </div>
       <div class="faq-item">
         <div class="faq-q">O que é o "Potencial de Objetivos" na sugestão de pedido?</div>
-        <div class="faq-a">É um resumo de como o pedido em construção contribui para os seus objetivos ativos. Mostra o valor aproximado que seria adicionado à Venda Total, Venda Indústria e Positivação de Produtos se o pedido for confirmado.</div>
+        <div class="faq-a">É um resumo de como o pedido em construção contribui para os seus objetivos ativos. Mostra o valor aproximado que seria adicionado à Venda Total, Venda Indústria e Positivação de Produtos se o pedido for confirmado. Em Venda Total e Venda Indústria, o pedido conta sem ICMS-ST, igual ao realizado.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Por que a barra da meta é menor que o valor do pedido?</div>
+        <div class="faq-a">Porque o ICMS-ST não conta como faturamento. A barra usa o valor líquido de ST, igual ao realizado; o preço e o total do pedido continuam com ST.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">O que acontece se o cliente já tiver um carrinho?</div>
+        <div class="faq-a">Ao prosseguir para o checkout, a janela "Este cliente já tem um carrinho ativo" pergunta o que fazer: <strong>Substituir carrinho</strong>, <strong>Adicionar a este carrinho</strong> ou <strong>Cancelar</strong>. O carrinho antigo só é descartado depois que o novo existe.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso usar Objetivos e Sugestões sem internet?</div>
+        <div class="faq-a">Não. Sem rede, o módulo aparece apagado no menu e na tela inicial, e volta sozinho quando a conexão voltar. Só a Cotação Ágil funciona offline.</div>
       </div>
     </div>
   </div>
 
 </div>
 
-<div style="background:#ede9f8;border-top:1px solid #c4aeef;color:#5b2da0;padding:9px 24px;font-size:13px;text-align:center;font-weight:600">✓ Este manual está atualizado de acordo com a versão 0.11.3</div>
+<div style="background:#ede9f8;border-top:1px solid #c4aeef;color:#5b2da0;padding:9px 24px;font-size:13px;text-align:center;font-weight:600">✓ Este manual está atualizado de acordo com a versão 1.0.0</div>
 <footer>
   Nexfar Inteligência Comercial &middot; Guia de Uso &middot; Objetivos e Sugestões<br>
-  <span style="color:#c4aeef">Atualizado em setembro/2026 &middot; v0.11.3</span>
+  <span style="color:#c4aeef">Atualizado em outubro/2026 &middot; v1.0.0</span>
 </footer>
 
 <!--NAVEXPORT-->

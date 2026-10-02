@@ -226,6 +226,8 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <a href="/ic/objetivos-e-sugestoes-sem-meta" class="current">Objetivos · Sem meta</a>
           <a href="/ic/cotacao-agil">Cotação Ágil</a>
           <a href="/ic/catalogo-digital">Catálogo Digital</a>
+          <a href="/ic/offline-e-sincronizacao">Modo offline e sincronização</a>
+          <a href="/ic/acompanhamento-jbp">Acompanhamento JBP</a>
         </div>
       </div>
     </div>
@@ -256,7 +258,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">1</div>
             <div class="step-body">
               <div class="step-title">Abra a Inteligência Comercial</div>
-              <div class="step-text">Acesse pelo link do seu distribuidor ou pelo botão na Plataforma de Vendas. O login é automático via Login Unificado, sem senha separada.</div>
+              <div class="step-text">Acesse pelo link do seu distribuidor ou pelo botão na Plataforma de Vendas. O login é automático via Login Unificado, sem senha separada. O primeiro acesso precisa de internet; depois disso, o app abre mesmo sem rede, com a sessão salva no aparelho.</div>
               <p style="font-size:12px;color:#9ca3af;margin-top:6px">Obs.: endereço no formato <code style="font-size:11px;background:#f3f4f6;border-radius:3px;padding:1px 4px;color:#6b7280">distribuidor.ic.nexfar.com.br</code>, onde "distribuidor" é o nome do seu distribuidor.</p>
             </div>
           </div>
@@ -264,9 +266,17 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">2</div>
             <div class="step-body">
               <div class="step-title">Toque em "Objetivos e Sugestões"</div>
-              <div class="step-text">O card de Objetivos e Sugestões abre o painel de desempenho comercial e a lista de clientes com oportunidades de pedido.</div>
+              <div class="step-text">O card de Objetivos e Sugestões abre o painel de desempenho comercial e a lista de clientes com oportunidades de pedido. A tela inicial também traz <strong>Cotação Ágil</strong>, <strong>Catálogo Digital</strong> e, quando o distribuidor tem acordos JBP, <strong>Acompanhamento JBP</strong> (veja o manual <a href="/ic/acompanhamento-jbp">Acompanhamento JBP</a>).</div>
             </div>
           </div>
+        </div>
+        <div class="callout callout-info" style="margin-top:12px">
+          <span class="callout-icon">📶</span>
+          <div class="callout-body"><strong>Sem internet, só a Cotação Ágil funciona.</strong> Os outros módulos aparecem apagados e, ao tocar, o app avisa <em>"Objetivos e Sugestões precisa de internet. Ele volta assim que a conexão voltar. A Cotação Ágil continua funcionando."</em> Eles voltam sozinhos quando a rede volta.</div>
+        </div>
+        <div class="callout callout-info" style="margin-top:8px">
+          <span class="callout-icon">🔄</span>
+          <div class="callout-body"><strong>Selo de conexão e sincronização:</strong> no canto direito do topo, o selo mostra <strong>Online</strong>, <strong>Offline</strong>, <strong>Sinal fraco</strong>, <strong>Sincronizando X de Y</strong> ou <strong>Verificando</strong>. Toque nele, ou em <strong>Sincronizar dados</strong> no menu lateral, para atualizar os dados. O app não sincroniza mais sozinho ao abrir. Se os dados forem de outro dia, aparece o aviso <strong>Sincronização pendente</strong>, com a data da última sincronização e o botão <code>Sincronizar agora</code>. Veja os detalhes no manual <a href="/ic/offline-e-sincronizacao">Modo offline e sincronização</a>.</div>
         </div>
       </div>
       <div class="screen-col">
@@ -294,7 +304,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">1</div>
             <div class="step-body">
               <div class="step-title">Veja o desempenho por frente</div>
-              <div class="step-text">Cada card mostra o progresso em uma frente comercial: Venda Total, Positivação de Clientes, Positivação de Produtos e outros. Toque para explorar o detalhe.</div>
+              <div class="step-text">Cada card mostra uma frente comercial: Venda Total, Positivação de Clientes, Positivação de Produtos e outras. Sem meta definida, o card mostra só o valor realizado, sem barra de progresso. Toque para explorar o detalhe.</div>
             </div>
           </div>
           <div class="step">
@@ -311,6 +321,10 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
               <div class="step-text">Toque em <code>Ver Oportunidade</code> no card do cliente para abrir a sugestão de pedido personalizada para aquele PDV.</div>
             </div>
           </div>
+        </div>
+        <div class="callout callout-info" style="margin-top:12px">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body"><strong>Os cards dependem do seu distribuidor.</strong> Além dos de sempre, podem aparecer, dependendo da configuração: <strong>Venda por categoria</strong> (um card por categoria, cada um com seu atalho no menu lateral), <strong>Mix distribuição</strong> (produtos distintos por filial), <strong>Positivação de clientes – últimos 4 meses</strong> (janela móvel; enquanto não fecha, o card avisa <em>"Janela incompleta: N de 4 meses"</em>) e <strong>Positivação de produtos – média de produtos por cliente positivado</strong>.</div>
         </div>
       </div>
       <div class="screen-col">
@@ -359,7 +373,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
             <div class="step-num">4</div>
             <div class="step-body">
               <div class="step-title">Prosseguir p/ checkout</div>
-              <div class="step-text">Botão primário no rodapé. Abre a Plataforma de Vendas em nova aba com o carrinho já preenchido com todos os produtos e quantidades da sugestão.</div>
+              <div class="step-text">Botão primário no rodapé. Abre a Plataforma de Vendas em nova aba com o carrinho já preenchido com todos os produtos e quantidades da sugestão. Se o cliente já tem um carrinho ativo, o app pergunta antes o que fazer com ele (ver <a href="#s4">etapa 4</a>).</div>
             </div>
           </div>
         </div>
@@ -425,23 +439,34 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">Toque em "Prosseguir p/ checkout"</div>
-            <div class="step-text">A Plataforma de Vendas abre em nova aba com o carrinho preenchido com todos os produtos e quantidades da sugestão.</div>
+            <div class="step-text">A Plataforma de Vendas abre em nova aba com o carrinho preenchido com todos os produtos e quantidades da sugestão. Quantidade acima do estoque é ajustada, com o aviso <em>"N produtos tiveram a quantidade ajustada pelo estoque disponível"</em>.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Se o cliente já tem um carrinho, escolha o que fazer</div>
+            <div class="step-text">Se o cliente já tem um carrinho ativo, abre a janela <strong>"Este cliente já tem um carrinho ativo"</strong>, com o resumo <em>"Carrinho atual: N itens · R$…"</em>. Escolha o que fazer:<ul style="margin:6px 0 0 14px;line-height:1.8"><li><code>Substituir carrinho</code>: descarta os itens atuais e cria um novo carrinho.</li><li><code>Adicionar a este carrinho</code>: mantém os itens atuais. Item que já está no carrinho fica com a quantidade da sugestão.</li><li><code>Cancelar</code>: volta para a sugestão sem mexer no carrinho.</li></ul></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
           <div class="step-body">
             <div class="step-title">Revise o carrinho</div>
             <div class="step-text">Na Plataforma de Vendas você pode ajustar quantidades, adicionar mais itens ou remover produtos antes de finalizar.</div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">3</div>
+          <div class="step-num">4</div>
           <div class="step-body">
             <div class="step-title">Confirme o pedido normalmente</div>
             <div class="step-text">O pedido segue o fluxo padrão da Plataforma de Vendas.</div>
           </div>
         </div>
+      </div>
+      <div class="callout callout-tip" style="margin-top:12px">
+        <span class="callout-icon">🛒</span>
+        <div class="callout-body"><strong>Nenhum carrinho se perde:</strong> ao escolher <code>Substituir carrinho</code>, o carrinho antigo só é descartado depois que o novo já existe.</div>
       </div>
       <div class="highlight">
         <div class="highlight-title">Fluxo completo:</div>
@@ -471,7 +496,7 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
     <div style="padding:0 28px 28px;counter-reset:faq-counter">
       <div class="faq-item">
         <div class="faq-q">Por que o painel de metas aparece sem progresso?</div>
-        <div class="faq-a">Quando o distribuidor não configura um tipo de meta, o card aparece sem barra de progresso. Isso não impede o uso das sugestões de pedido, que funcionam de forma independente.</div>
+        <div class="faq-a">Porque, sem meta definida, o card mostra só o valor realizado: sem barra de progresso, e nunca zerado. Isso não impede o uso das sugestões de pedido, que funcionam de forma independente.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Como o sistema define as sugestões de cada cliente?</div>
@@ -485,15 +510,23 @@ body.printing .hero-top,body.printing .flow-bar{display:none!important}
         <div class="faq-q">Posso usar as sugestões sem criar o pedido imediatamente?</div>
         <div class="faq-a">Sim. Use o botão <em>"Compartilhar"</em> para exportar a sugestão em PDF ou CSV. Você pode criar o pedido posteriormente quando o cliente confirmar.</div>
       </div>
+      <div class="faq-item">
+        <div class="faq-q">O que acontece se o cliente já tiver um carrinho?</div>
+        <div class="faq-a">Ao prosseguir para o checkout, a janela "Este cliente já tem um carrinho ativo" pergunta o que fazer: <strong>Substituir carrinho</strong>, <strong>Adicionar a este carrinho</strong> ou <strong>Cancelar</strong>. O carrinho antigo só é descartado depois que o novo existe.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso usar Objetivos e Sugestões sem internet?</div>
+        <div class="faq-a">Não. Sem rede, o módulo aparece apagado no menu e na tela inicial, e volta sozinho quando a conexão voltar. Só a Cotação Ágil funciona offline.</div>
+      </div>
     </div>
   </div>
 
 </div>
 
-<div style="background:#ede9f8;border-top:1px solid #c4aeef;color:#5b2da0;padding:9px 24px;font-size:13px;text-align:center;font-weight:600">✓ Este manual está atualizado de acordo com a versão 0.11.3</div>
+<div style="background:#ede9f8;border-top:1px solid #c4aeef;color:#5b2da0;padding:9px 24px;font-size:13px;text-align:center;font-weight:600">✓ Este manual está atualizado de acordo com a versão 1.0.0</div>
 <footer>
   Nexfar Inteligência Comercial &middot; Guia de Uso &middot; Sugestões de Pedido<br>
-  <span style="color:#c4aeef">Atualizado em setembro/2026 &middot; v0.11.3</span>
+  <span style="color:#c4aeef">Atualizado em outubro/2026 &middot; v1.0.0</span>
 </footer>
 
 <!--NAVEXPORT-->

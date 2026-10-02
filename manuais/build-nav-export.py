@@ -29,12 +29,14 @@ def nexfar_logo_img():
 PRODUCTS = {
     "ic": {
         "nome": "Inteligência Comercial",
-        "versao": "0.11.3",
+        "versao": "1.0.0",
         "manuais": [
             ("objetivos-e-sugestoes",           "Objetivos · Com meta",  900, 1125, 1157),
             ("objetivos-e-sugestoes-sem-meta",  "Objetivos · Sem meta",  900, 1125, 1157),
             ("cotacao-agil",                    "Cotação Ágil", 1125, 1125, 1157),
             ("catalogo-digital",                "Catálogo Digital", 1125, 1125, 1157),
+            ("offline-e-sincronizacao",         "Modo offline e sincronização", 1125, 1125, 1157),
+            ("acompanhamento-jbp",              "Acompanhamento JBP", 1125, 1125, 1157),
         ],
     },
     "vendas": {
