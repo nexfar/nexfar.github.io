@@ -46,6 +46,13 @@ PRODUCTS = {
             ("link-de-pagamento",               "Link de pagamento", 1125, 1125, 1157),
         ],
     },
+    "gerencial": {
+        "nome": "Plataforma Gerencial",
+        "versao": "3.10",
+        "manuais": [
+            ("metas",                           "Metas", 1125, 1125, 1157),
+        ],
+    },
 }
 
 # Manuais que entregam PDF pronto em vez da impressao do navegador. A chave e
@@ -57,6 +64,10 @@ DOWNLOADS = {
          "/vendas/pdf/manual-link-de-pagamento.pdf"),
         ("Versão compacta", "O passo a passo em uma página, para quem tem pouco tempo.",
          "/vendas/pdf/manual-link-de-pagamento-compacto.pdf"),
+    ],
+    "gerencial/metas": [
+        ("Versão completa", "Todas as etapas, os erros e as perguntas frequentes, em uma página contínua.",
+         "/gerencial/pdf/manual-metas.pdf"),
     ],
 }
 
