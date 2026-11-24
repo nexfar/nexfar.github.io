@@ -44,6 +44,7 @@ PRODUCTS = {
         "versao": "3.10",
         "manuais": [
             ("link-de-pagamento",               "Link de pagamento", 1125, 1125, 1157),
+            ("melhor-condicao",                 "Melhor condição", 1125, 1125, 1157),
         ],
     },
     "gerencial": {
@@ -64,6 +65,10 @@ DOWNLOADS = {
          "/vendas/pdf/manual-link-de-pagamento.pdf"),
         ("Versão compacta", "O passo a passo em uma página, para quem tem pouco tempo.",
          "/vendas/pdf/manual-link-de-pagamento-compacto.pdf"),
+    ],
+    "vendas/melhor-condicao": [
+        ("Versão completa", "Todas as etapas, os erros e as perguntas frequentes, em uma página contínua.",
+         "/vendas/pdf/manual-melhor-condicao.pdf"),
     ],
     "gerencial/metas": [
         ("Versão completa", "Todas as etapas, os erros e as perguntas frequentes, em uma página contínua.",
